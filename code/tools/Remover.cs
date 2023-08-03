@@ -1,6 +1,9 @@
-﻿namespace Sandbox.Tools
+﻿using Devbox;
+
+namespace Sandbox.Tools
 {
 	[Library( "tool_remover", Title = "Remover", Description = "Remove entities", Group = "construction" )]
+	[Tool("tools", "construction")]
 	public partial class RemoverTool : BaseTool
 	{
 		public override void Simulate()

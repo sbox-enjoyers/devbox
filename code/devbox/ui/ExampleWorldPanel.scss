@@ -1,0 +1,13 @@
+exampleworldpanel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-position: center;
+	background: url("https://i.gifer.com/embedded/download/7V7K.gif");
+
+	.label {
+		font-size: 64px;
+		color: red;
+	}
+}

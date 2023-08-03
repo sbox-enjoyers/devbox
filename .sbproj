@@ -307,6 +307,18 @@
       ]
     },
     "HttpAllowList": null,
-    "TickRate": 50
+    "TickRate": 50,
+    "LaunchConfigs": [
+      {
+        "Name": "My New Config",
+        "GameIdent": "coretech.devbox#local",
+        "MapName": "facepunch.flatgrass",
+        "MaxPlayers": 1,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "",
+        "PostLaunchCommand": ""
+      }
+    ]
   }
 }

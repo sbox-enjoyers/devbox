@@ -25,13 +25,34 @@ public partial class SpawnMenu : Panel
 				tabs.SelectedButton = tabs.AddButtonActive( "#spawnmenu.props", ( b ) => props.SetClass( "active", b ) );
 
 				var models = body.AddChild<ModelList>();
-				tabs.AddButtonActive( "#spawnmenu.modellist", ( b ) => models.SetClass( "active", b ) );			
-				
+				tabs.AddButtonActive( "#spawnmenu.modellist", ( b ) => models.SetClass( "active", b ) );
+
 				var ents = body.AddChild<EntityList>();
 				tabs.AddButtonActive( "#spawnmenu.entities", ( b ) => ents.SetClass( "active", b ) );
 
 				var npclist = body.AddChild<NpcList>();
 				tabs.AddButtonActive( "#spawnmenu.npclist", ( b ) => npclist.SetClass( "active", b ) );
+
+				var npclist1 = body.AddChild<NpcList>();
+				tabs.AddButtonActive( "#spawnmenu.npclist1", ( b ) => npclist1.SetClass( "active", b ) );
+
+				var npclist2 = body.AddChild<NpcList>();
+				tabs.AddButtonActive( "#spawnmenu.npclist2", ( b ) => npclist2.SetClass( "active", b ) );
+
+				var npclist3 = body.AddChild<NpcList>();
+				tabs.AddButtonActive( "#spawnmenu.npclist3", ( b ) => npclist3.SetClass( "active", b ) );
+
+				var npclist4 = body.AddChild<NpcList>();
+				tabs.AddButtonActive( "#spawnmenu.npclist4", ( b ) => npclist4.SetClass( "active", b ) );
+
+				var npclist5 = body.AddChild<NpcList>();
+				tabs.AddButtonActive( "#spawnmenu.npclist5", ( b ) => npclist5.SetClass( "active", b ) );
+
+				var npclist6 = body.AddChild<NpcList>();
+				tabs.AddButtonActive( "#spawnmenu.npclist6", ( b ) => npclist6.SetClass( "active", b ) );
+
+				var npclist7 = body.AddChild<NpcList>();
+				tabs.AddButtonActive( "#spawnmenu.npclist7", ( b ) => npclist7.SetClass( "active", b ) );
 			}
 		}
 
@@ -66,7 +87,7 @@ public partial class SpawnMenu : Panel
 			var button = toollist.Add.Button( entry.Title );
 			button.SetClass( "active", entry.ClassName == ConsoleSystem.GetValue( "tool_current" ) );
 
-			button.AddEventListener( "onclick", () => 
+			button.AddEventListener( "onclick", () =>
 			{
 				SetActiveTool( entry.ClassName );
 

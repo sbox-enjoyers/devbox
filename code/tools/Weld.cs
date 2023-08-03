@@ -1,6 +1,9 @@
-﻿namespace Sandbox.Tools
+﻿using Devbox;
+
+namespace Sandbox.Tools
 {
 	[Library( "tool_weld", Title = "Weld", Description = "Weld stuff together", Group = "construction" )]
+	[Tool( "tools", "constraints" )]
 	public partial class WeldTool : BaseTool
 	{
 		private Prop target;

@@ -1,8 +1,10 @@
-﻿using Sandbox.Physics;
+﻿using Devbox;
+using Sandbox.Physics;
 
 namespace Sandbox.Tools;
 
 [Library( "tool_rope", Title = "Rope", Description = "Join two things together with a rope", Group = "construction" )]
+[Tool( "tools", "constraints" )]
 public partial class RopeTool : BaseTool
 {
 	private PhysicsBody targetBody;

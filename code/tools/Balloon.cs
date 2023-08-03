@@ -3,6 +3,7 @@
 namespace Sandbox.Tools;
 
 [Library( "tool_balloon", Title = "Balloons", Description = "Create Balloons!", Group = "construction" )]
+[Spawnable]
 public partial class BalloonTool : BaseTool
 {
 	[Net]
