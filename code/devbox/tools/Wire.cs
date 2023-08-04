@@ -6,13 +6,18 @@ namespace Devbox.Tools;
 
 [Library( "tool_wire", Title = "Wire", Description = "Link gates", Group = "general" )]
 [Tool( "wireless", "general" )]
-
 public partial class WireTool : BaseTool
 {
+	[ToolInsptectorColorField( "Color" )]
+	public Color Color { get; set; } = Color.White;
+
+
 	public override void Simulate()
 	{
 		if ( !Game.IsServer )
+		{
 			return;
+		}
 
 		using ( Prediction.Off() )
 		{

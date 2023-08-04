@@ -1,0 +1,77 @@
+@using Sandbox;
+@using System;
+@using Sandbox.UI;
+@inherits Panel;
+@attribute [StyleSheet("/devbox/styles/resizable-split-view.scss")];
+
+<root>
+	<div @ref=Left class="resizable-view-left"></div>
+	<div @ref=Resizer class="resizable-view-resizer" @onmousedown=@onResizerMouseDown @onmouseup=@onResizerMouseUp></div>
+	<div @ref=Right class="resizable-view-right"></div>
+</root>
+
+
+@code
+{
+	public Panel Left { get; set; }
+	public Panel Resizer { get; set; }
+	public Panel Right { get; set; }
+	public bool IsResize { get; set; } = false;
+
+	protected Panel leftPanel;
+	protected Panel rightPanel;
+
+	protected float leftWidth;
+	Vector2 position;
+
+	public override void Tick()
+	{
+		base.Tick();
+
+		if (IsResize)
+		{
+			position += Mouse.Delta;
+
+			var width = ((this.leftWidth + position.x) * 100) / this.Box.Rect.Width;
+			var precentWidth = Length.Percent(width);
+
+			this.Left.Style.Width = precentWidth;
+			this.Left.Style.Dirty();
+
+			Vector2 mousePosition = this.Resizer.Box.Rect.Position + this.Resizer.Box.Rect.Size * 0.5f;
+			mousePosition.y = Mouse.Position.y;
+		}
+	}
+
+	public void SetLeftPanel(Panel panel)
+	{
+		leftPanel = panel;
+	}
+
+	public void SetRightPanel(Panel panel)
+	{
+		rightPanel = panel;
+	}
+
+	protected override void OnAfterTreeRender(bool firstTime)
+	{
+		base.OnAfterTreeRender(firstTime);
+
+		Left.AddChild(this.leftPanel);
+		Right.AddChild(this.rightPanel);
+	}
+
+	protected void onResizerMouseDown(PanelEvent panelEvent)
+	{
+		this.leftWidth = Left.Box.Rect.Width;
+		this.position = Vector2.Zero;
+		this.IsResize = true;
+	}
+
+	protected void onResizerMouseUp(PanelEvent panelEvent)
+	{
+		this.IsResize = false;
+		this.leftWidth = Left.Box.Rect.Width;
+		this.position = Vector2.Zero;
+	}
+}

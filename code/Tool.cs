@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Devbox;
+using Sandbox;
 using Sandbox.Tools;
 
 [Library( "weapon_tool", Title = "Toolgun" )]
@@ -66,6 +67,8 @@ partial class Tool : Carriable
 		}
 
 		CurrentTool = TypeLibrary.Create<BaseTool>( toolName );
+
+		
 
 		if ( CurrentTool != null )
 		{

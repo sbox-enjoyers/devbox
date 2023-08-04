@@ -1,0 +1,27 @@
+resizablesplitview {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .resizable-view-left {
+        width: 50%;
+        //background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .resizable-view-resizer {
+        width: 3px;
+        background-color: rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    }
+
+    .resizable-view-right {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0%;
+        //background-color: rgba(0, 0, 0, 0.5);
+    }
+}

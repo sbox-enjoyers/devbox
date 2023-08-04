@@ -5,7 +5,21 @@
     "spawnmenu.tools": "tools",
     "spawnmenu.utility": "utility",
     "spawnmenu.npclist": "NPC",
+    
     "tab.tools": "Tools",
     "tab.wireless" :  "Wireless",
-    "tools.tool_wire" : "Wire"
+
+    "tools.tool_wire" : "Wire",
+    "tools.tool_balloon" : "Balloon",
+    "tools.tool_boxgun" : "BoxGun",
+    "tools.tool_color" : "Color",
+    "tools.tool_lamp" : "Lamp",
+    "tools.tool_light" : "Light",
+    "tools.tool_leafblower" : "LeafBlower",
+    "tools.tool_remover" : "Remover",
+    "tools.tool_resizer" : "Resizer",
+    "tools.tool_rope" : "Rope",
+    "tools.tool_thruster" : "Thruster",
+    "tools.tool_weld" : "Weld",
+    "tools.tool_wheel" : "Wheel"
 }

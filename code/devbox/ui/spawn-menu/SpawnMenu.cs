@@ -1,13 +1,10 @@
 ﻿using Devbox;
-using Devbox.UI;
 using Sandbox;
 using Sandbox.Tools;
 using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
 using System.Collections.Generic;
 
-namespace Devbox;
+namespace Devbox.UI;
 
 [Library]
 public partial class SpawnMenu : Panel
@@ -25,13 +22,15 @@ public partial class SpawnMenu : Panel
 
 		Instance = this;
 
-		var left = Add.Panel( "left" );
+		var view = new ResizableSplitView();
+
+		var left = new Panel();
+		left.AddClass( "left" );
 		{
 			var tabs = left.AddChild<ButtonGroup>();
 			tabs.AddClass( "tabs" );
 
 			var body = left.Add.Panel( "body" );
-
 			{
 				var props = body.AddChild<SpawnList>();
 				tabs.SelectedButton = tabs.AddButtonActive( "#spawnmenu.props", ( b ) => props.SetClass( "active", b ) );
@@ -47,45 +46,61 @@ public partial class SpawnMenu : Panel
 			}
 		}
 
-		var right = Add.Panel( "right" );
+
+		var right = new Panel();
+		right.AddClass( "right" );
 		{
 			var tabs = right.AddChild<ButtonGroup>();
 			tabs.AddClass( "tabs" );
-
-			var body = right.Add.Panel( "body" );
-
-			var tabAttributes = new List<(TypeDescription Type, TabAttribute Attribute)>(TypeLibrary.GetTypesWithAttribute<TabAttribute>());
-
-			tabAttributes.Sort( (a, b) => { 
-				return a.Attribute.OrderPriority > b.Attribute.OrderPriority 
-					? 1 
-					: a.Attribute.OrderPriority == b.Attribute.OrderPriority
-						? 0
-						: -1; 
-			} );
-
-			foreach ( var entry in tabAttributes )
 			{
-				Panel panel = TypeLibrary.Create<Panel>( entry.Type.ClassName );
+				var tabAttributes = new List<(TypeDescription Type, TabAttribute Attribute)>(TypeLibrary.GetTypesWithAttribute<TabAttribute>());
 
-				tabs.AddButtonActive( $"#tab.{entry.Attribute.Name}", ( b ) =>
-				{
-					panel.SetClass( "active", b );
-
-					if ( b )
-					{
-						this.activeTab = entry.Attribute.Name;
-						this.RebuildToolList();
-					}
+				tabAttributes.Sort( (a, b) => { 
+					return a.Attribute.OrderPriority > b.Attribute.OrderPriority 
+						? 1 
+						: a.Attribute.OrderPriority == b.Attribute.OrderPriority
+							? 0
+							: -1; 
 				} );
+
+				foreach ( var entry in tabAttributes )
+				{
+					Panel panel = TypeLibrary.Create<Panel>( entry.Type.ClassName );
+
+					tabs.AddButtonActive( $"#tab.{entry.Attribute.Name}", ( b ) =>
+					{
+						panel.SetClass( "active", b );
+
+						if ( b )
+						{
+							this.activeTab = entry.Attribute.Name;
+							this.RebuildToolList();
+						}
+					} );
+				}
+
+				tabs.SelectedButton = tabs.GetChild( 0 );
 			}
 
-			tabs.SelectedButton = tabs.GetChild( 0 );
-			toollist = new ToolList();
-			body.AddChild( toollist );
+			var body = new ResizableSplitView();
+			body.AddClass( "body" );
+			{
+				toollist = new ToolList();
+				body.SetLeftPanel( toollist );
 
-			inspector = body.Add.Panel( "inspector" );
+				inspector = new Panel();
+				inspector.AddClass( "inspector" );
+				body.SetRightPanel( inspector );
+
+				
+			}
+			right.AddChild( body );
 		}
+
+		view.SetLeftPanel( left );
+		view.SetRightPanel( right );
+
+		this.AddChild( view );
 	}
 
 	public void RebuildToolList()
@@ -100,8 +115,6 @@ public partial class SpawnMenu : Panel
 			toollist.AddCollapse( collapse );
 
 			var tools = groups.GetOrCreate( groupName );
-			//groupList = new GroupList();
-			//toollist.addChild(groupList)'
 
 			foreach ( var tool in tools )
 			{
@@ -124,18 +137,33 @@ public partial class SpawnMenu : Panel
 						}
 					}
 				} );
-
-				button.AddEventListener( "onmousedown", () => {
-					Log.Info("Сам ты даун!");
-				} );
 			}
 		}
 	}
 
 	void SetActiveTool( string className )
 	{
+		/*
+		var toolType = TypeLibrary.GetType( className );
+
+		foreach (var property in toolType.Properties )
+		{
+			if ( !property.HasAttribute<ToolInsptectorFieldAttribute>() )
+			{
+				continue;
+			}
+
+			ToolInsptectorFieldAttribute toolInsptectorFieldAttribute = property.GetCustomAttribute<ToolInsptectorFieldAttribute>();
+
+			Log.Info( $"{className} - {toolInsptectorFieldAttribute.Title}" );
+		}
+		*/
+
+
 		// setting a cvar
 		ConsoleSystem.Run( "tool_current", className );
+
+
 
 		// set the active weapon to the toolgun
 		if ( Game.LocalPawn is not Player player ) return;
@@ -179,7 +207,7 @@ public partial class SpawnMenu : Panel
 	{
 		base.OnHotloaded();
 		this.buildToolTabs();
-		this.RebuildToolList();
+		//this.RebuildToolList();
 	}
 
 

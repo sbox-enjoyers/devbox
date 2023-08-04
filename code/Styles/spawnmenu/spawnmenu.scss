@@ -1,4 +1,4 @@
-﻿
+
 @import "_packageicon.scss";
 @import "_tabs.scss";
 @import "_packagelist.scss";
@@ -31,11 +31,11 @@ spawnmenu {
 	}
 
 	.right {
-		margin-left: 50px;
+		margin-left: 20px;
 		flex-direction: column;
-		min-width: 500px;
+		width: 100%;
 		flex-shrink: 0;
-		left: 500px;
+		left: 0;
 		transition: all 0.3s ease-in;
 
 		.body {
