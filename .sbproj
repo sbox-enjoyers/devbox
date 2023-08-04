@@ -310,7 +310,7 @@
     "TickRate": 50,
     "LaunchConfigs": [
       {
-        "Name": "My New Config",
+        "Name": "devbox:dev",
         "GameIdent": "coretech.devbox#local",
         "MapName": "facepunch.flatgrass",
         "MaxPlayers": 1,

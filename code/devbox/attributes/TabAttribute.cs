@@ -6,9 +6,11 @@ namespace Devbox;
 public sealed class TabAttribute : TagAttribute
 {
 	public string Name;
+	public short OrderPriority;
 
-	public TabAttribute( string name ) : base( "tab" )
+	public TabAttribute( string name , short orderPriority = 0 ) : base( "tab" )
 	{
 		this.Name = name;
+		this.OrderPriority = orderPriority;
 	}
 }

@@ -1,0 +1,23 @@
+toollist {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    color: #aaa;
+
+    .toollist-item {
+        padding: 3px 10px;
+        font-size: 11px;
+        transition: color 0.2s ease-out;
+        cursor: pointer;
+
+        &:hover {
+            border-left: 2px solid #3273eb;
+            color: white;
+        }
+
+        &.active {
+            border-left: 3px solid #3273eb;
+            color: white;
+        }
+    }
+}

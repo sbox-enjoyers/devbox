@@ -1,0 +1,54 @@
+.collapse {
+    display: flex;
+    flex-direction: column;
+
+    .collapse-button {
+        width: 100%;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 5px;
+        color: white;
+
+        &.active {
+        }
+    }
+
+    .collapse-view {
+        display: flex;
+        flex-direction: column;
+        font-weight: 200;
+        color: #aaa;
+        max-height: 0px;
+        transition: max-height 0.2s ease-out;
+        overflow: hidden;
+        width: 100%;
+
+        .collapse-view-item {
+            color: #aaa;
+            font-size: 11px;
+            font-weight: 400;
+            min-height: 25px;
+            max-height: 25px;
+            margin-left: 10px;
+            padding: 3px 10px;
+
+            transition: color 0.2s ease-out;
+            cursor: pointer;
+
+            &:hover {
+                border-left: 2px solid #3273eb;
+                color: white;
+            }
+
+            &.active {
+                border-left: 3px solid #3273eb;
+                color: white;
+            }
+        }
+    }
+
+    .active {
+        max-height: 500px;
+        transition: max-height 0.2s ease-in;
+    }
+}

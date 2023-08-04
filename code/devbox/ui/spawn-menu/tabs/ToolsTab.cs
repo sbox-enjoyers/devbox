@@ -3,7 +3,7 @@
 
 namespace Devbox;
 
-[Tab("tools")]
+[Tab("tools", short.MinValue)]
 public class ToolsTab : Panel
 {
 	public ToolsTab()

@@ -1,8 +1,11 @@
 {
-    "spawnmenu.props" : "models",
+    "spawnmenu.props" : "Props",
     "spawnmenu.entities" : "entities",
     "spawnmenu.modellist": "Models",
     "spawnmenu.tools": "tools",
     "spawnmenu.utility": "utility",
-    "spawnmenu.npclist": "NPC"
+    "spawnmenu.npclist": "NPC",
+    "tab.tools": "Tools",
+    "tab.wireless" :  "Wireless",
+    "tools.tool_wire" : "Wire"
 }
