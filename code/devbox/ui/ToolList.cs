@@ -1,9 +1,8 @@
-﻿using Devbox.UI;
-using Sandbox;
-using Sandbox.UI;
+﻿using Sandbox.UI;
 using System.Collections.Generic;
 
-namespace Devbox;
+namespace Devbox.UI;
+
 public class ToolList : Panel
 {
 	public readonly List<Collapse> CollapseList = new();

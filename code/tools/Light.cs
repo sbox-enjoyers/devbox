@@ -1,4 +1,5 @@
-﻿using Sandbox.Physics;
+﻿using Devbox;
+using Sandbox.Physics;
 
 namespace Sandbox.Tools;
 
@@ -8,6 +9,11 @@ public partial class LightTool : BaseTool
 	PreviewEntity previewModel;
 
 	private string Model => "models/light/light_tubular.vmdl";
+
+
+	[ToolInsptectorColorField( "#tool.tool_light.color_title" )]
+	public static Color Color123 { get; set; } = Color.White;
+
 
 	protected override bool IsPreviewTraceValid( TraceResult tr )
 	{
@@ -28,6 +34,11 @@ public partial class LightTool : BaseTool
 			previewModel.OffsetBounds = true;
 			previewModel.PositionOffset = -previewModel.CollisionBounds.Center;
 		}
+	}
+
+	public override void Activate()
+	{
+		base.Activate();
 	}
 
 	public override void Simulate()
@@ -64,7 +75,7 @@ public partial class LightTool : BaseTool
 				LinearAttenuation = 0.0f,
 				QuadraticAttenuation = 1.0f,
 				Brightness = 1,
-				Color = Color.Random,
+				Color = Color123,
 				//LightCookie = Texture.Load( "materials/effects/lightcookie.vtex" )
 			};
 

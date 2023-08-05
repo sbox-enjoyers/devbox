@@ -8,9 +8,14 @@ namespace Devbox.Tools;
 [Tool( "wireless", "general" )]
 public partial class WireTool : BaseTool
 {
-	[ToolInsptectorColorField( "Color" )]
-	public Color Color { get; set; } = Color.White;
+	[ToolInsptectorColorField( "Color1" )]
+	public Color Color1 { get; set; } = Color.White;
 
+	[ToolInsptectorColorField( "Color2" )]
+	public Color Color2 { get; set; } = Color.White;
+
+	[ToolInsptectorColorField( "Color3" )]
+	public Color Color3 { get; set; } = Color.White;
 
 	public override void Simulate()
 	{

@@ -2,7 +2,7 @@
 using Sandbox.UI;
 
 
-namespace Devdbox;
+namespace Devbox;
 
 [Spawnable]
 [Library( "example_world_panel", Title = "Test" )]

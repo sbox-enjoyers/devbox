@@ -52,7 +52,7 @@ partial class Tool : Carriable
 
 	private void UpdateCurrentTool( IClient owner )
 	{
-		var toolName = owner.GetClientData<string>( "tool_current", "tool_balloon" );
+		var toolName = BaseTool.GetCurrentTool( owner );
 		if ( toolName == null )
 			return;
 

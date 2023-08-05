@@ -2,6 +2,20 @@
 using Sandbox.UI;
 using System.Linq;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+
+
+public class A
+{
+	public int Value { get; set; }
+
+	public void ChangeSelf()
+	{
+		TypeLibrary.SetProperty( this, "Value", 123 );
+	}
+}
+
+public class B : A { }
 
 
 partial class SandboxGame : GameManager

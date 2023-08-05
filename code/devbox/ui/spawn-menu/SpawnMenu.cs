@@ -88,8 +88,7 @@ public partial class SpawnMenu : Panel
 				toollist = new ToolList();
 				body.SetLeftPanel( toollist );
 
-				inspector = new Panel();
-				inspector.AddClass( "inspector" );
+				inspector = new Inspector();
 				body.SetRightPanel( inspector );
 
 				
@@ -143,27 +142,8 @@ public partial class SpawnMenu : Panel
 
 	void SetActiveTool( string className )
 	{
-		/*
-		var toolType = TypeLibrary.GetType( className );
-
-		foreach (var property in toolType.Properties )
-		{
-			if ( !property.HasAttribute<ToolInsptectorFieldAttribute>() )
-			{
-				continue;
-			}
-
-			ToolInsptectorFieldAttribute toolInsptectorFieldAttribute = property.GetCustomAttribute<ToolInsptectorFieldAttribute>();
-
-			Log.Info( $"{className} - {toolInsptectorFieldAttribute.Title}" );
-		}
-		*/
-
-
 		// setting a cvar
-		ConsoleSystem.Run( "tool_current", className );
-
-
+		BaseTool.SetCurrentTool( className );
 
 		// set the active weapon to the toolgun
 		if ( Game.LocalPawn is not Player player ) return;
@@ -186,7 +166,7 @@ public partial class SpawnMenu : Panel
 
 		Parent.SetClass( "spawnmenuopen", Input.Down( "menu" ) );
 
-		//UpdateActiveTool();
+		UpdateActiveTool();
 	}
 
 	void UpdateActiveTool()
@@ -207,7 +187,7 @@ public partial class SpawnMenu : Panel
 	{
 		base.OnHotloaded();
 		this.buildToolTabs();
-		//this.RebuildToolList();
+		this.RebuildToolList();
 	}
 
 

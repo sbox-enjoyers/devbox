@@ -8,7 +8,7 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace Devdbox;
+namespace Devbox;
 
 public class ExampleWorldPanel : WorldPanel
 {

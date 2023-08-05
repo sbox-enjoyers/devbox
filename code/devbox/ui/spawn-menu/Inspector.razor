@@ -1,0 +1,63 @@
+@using System;
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Tools;
+@using Sandbox.Razor;
+
+@namespace Devbox.UI
+@inherits Panel
+@attribute [StyleSheet("/devbox/styles/inspector.scss")]
+
+<root>
+	<h1>@displayName</h1>
+</root>
+
+
+@code
+{
+	protected string displayName { get; set; } = "";
+
+	protected override void OnAfterTreeRender(bool firstTime)
+	{
+		base.OnAfterTreeRender(firstTime);
+
+		if (firstTime)
+		{
+			this.onToolChanged(BaseTool.GetCurrentTool(Game.LocalClient));
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(this.displayName);
+	}
+
+	public void SetView(Panel view)
+	{
+		Panel panel = GetChild(1);
+
+		if (panel != null)
+		{
+			panel.Delete();
+		}
+
+		this.AddChild(view);
+	}
+
+	[Event("tool.changed")]
+	protected void onToolChanged(string value)
+	{
+		var toolTypeDescription = TypeLibrary.GetType<BaseTool>(value);
+
+		ToolAttribute toolAttribute = toolTypeDescription.GetAttribute<ToolAttribute>();
+
+		object[] args = { toolTypeDescription, toolAttribute };
+
+		InspectorViewBase view = toolAttribute != null && toolAttribute.Inspector != null ?
+			(InspectorViewBase) TypeLibrary.Create(toolAttribute.Inspector, typeof(InspectorViewBase), args) :
+			new InspectorView(toolTypeDescription, toolAttribute);
+
+		this.displayName = $"#tools.{toolTypeDescription.ClassName}";
+		this.SetView(view);
+	}
+}

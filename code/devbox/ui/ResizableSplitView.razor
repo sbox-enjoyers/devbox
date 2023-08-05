@@ -1,8 +1,10 @@
 @using Sandbox;
 @using System;
 @using Sandbox.UI;
-@inherits Panel;
-@attribute [StyleSheet("/devbox/styles/resizable-split-view.scss")];
+
+@namespace Devbox.UI
+@inherits Panel
+@attribute [StyleSheet("/devbox/styles/resizable-split-view.scss")]
 
 <root>
 	<div @ref=Left class="resizable-view-left"></div>
@@ -66,6 +68,9 @@
 		this.leftWidth = Left.Box.Rect.Width;
 		this.position = Vector2.Zero;
 		this.IsResize = true;
+
+		this.Style.Cursor = "pointer";
+		this.Style.Dirty();
 	}
 
 	protected void onResizerMouseUp(PanelEvent panelEvent)
@@ -73,5 +78,8 @@
 		this.IsResize = false;
 		this.leftWidth = Left.Box.Rect.Width;
 		this.position = Vector2.Zero;
+
+		this.Style.Cursor = null;
+		this.Style.Dirty();
 	}
 }
